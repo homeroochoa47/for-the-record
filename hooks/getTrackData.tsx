@@ -19,6 +19,7 @@ export const getTrackData = () => {
 }
 
 export const getTrackComments = (trackData: SpotifyTrackInfo ) => {
+  // query key is based on the data from above. we can delay this query from running
   const generateQueryKey = () => {
     if (trackData) {
       return ['trackComments', trackData.spotifyID];
