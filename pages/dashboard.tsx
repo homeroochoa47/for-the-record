@@ -12,7 +12,7 @@ export default function Dashboard() {
 
   return (
     <Layout>
-            <CommentBoard/>
+      <CommentBoard/>
     </Layout>
   )
 }

@@ -1,0 +1,1 @@
+ALTER TABLE `users` MODIFY COLUMN `profileImageURL` varchar(255);

@@ -2,9 +2,14 @@ import { UserButton } from "@clerk/nextjs";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import Menu from "./Menu";
+import SongDisplay from "./SongDisplay";
+import { ReactNode } from "react";
 
-const Layout = ({ children }) => {
+interface LayoutProps {
+  children: ReactNode; // Use ReactNode as the type for children
+}
 
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const {data, isLoading, isError, error}  = useQuery({
     queryKey: ['profileData'],
     queryFn: async () => {
@@ -24,19 +29,31 @@ const Layout = ({ children }) => {
   }
 
   return (
-    <div id='layout' className='relative bg-[#131013] w-full h-screen flex overflow-clip'>
+    <div id='layout' className='relative bg-[#131013] w-full h-screen flex flex-col md:flex-row md:overflow-hidden'>
       {/* right side desktop */}
-      <div id="menu" className="flex flex-col w-[25%] p-8">
-        <div id="user-avatar" className="flex items-center space-x-2">
-          <UserButton afterSignOutUrl="/"/>
+      <div id="menu" className="flex flex-col w-full md:w-[25%] p-3 sm:p-4 md:p-6 lg:p-8 bg-[#131013] border-b-4 md:border-none border-foreground/80 pb-6">
+        <div id="user-avatar" className="hidden md:flex items-center space-x-2">
+          <UserButton 
+            afterSignOutUrl="/"
+            appearance={{
+              elements: {
+                // rootBox: "w-full",
+                card: "bg-muted text-foreground",
+                userButtonPopoverActionButtonText: "text-foreground",
+                userButtonPopoverActionButtonIcon__manageAccount: "text-foreground",
+                userButtonPopoverFooter: "text-foreground",
+                userButtonPopoverActionButtonIcon__signOut: "text-foreground"
+              },
+            }}
+          />
           <p className="text-foreground">{data?.spotifyUserID}</p>
         </div>
-
-        <Menu/>
+        <SongDisplay/>
+        <Menu userName={data?.spotifyUserID}/>
       </div>
 
-      {/* left side desktop */}
-      <div className="m-4 rounded-lg p-12 bg-[#191719] w-full">
+      {/* left side desktop, bottom on mobile */}
+      <div className="md:m-4 md:rounded-lg p-3 sm:p-4 md:p-12 xl:m-8 bg-[#131013] md:bg-[#191719] w-full">
         {children}
       </div>
     </div>

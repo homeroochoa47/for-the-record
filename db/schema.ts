@@ -6,7 +6,7 @@ export const users = mysqlTable('users', {
   clerkUserID: varchar('clerkUserID', {length: 255}).notNull(),
   spotifyUserID: varchar('spotifyUserId', {length: 128}).notNull(),
   spotifyDisplayName: varchar('spotifyDisplayName', {length: 128}),
-  profileImageURL: varchar('profileImageURL', {length: 128}),
+  profileImageURL: varchar('profileImageURL', {length: 255}),
 });
 
 export const usersRelations = relations(users, ({ many }) => ({

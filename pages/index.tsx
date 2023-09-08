@@ -1,11 +1,5 @@
 import { Metadata } from "next"
 import Link from "next/link"
-
-
-
-import { cn } from "@/utils/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/ui/icons"
 import { SignInButton, UserButton } from "@clerk/nextjs"
 import { SignIn } from "@clerk/clerk-react"
 
@@ -15,14 +9,13 @@ export const metadata: Metadata = {
 }
 
 export default function Home() {
-
   return (
-    <>
+    <div className="">
       <header>
 				<UserButton afterSignOutUrl="/"/>
 			</header>
-      <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 bg-background">
-        
+
+      <div className="container relative h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0 bg-background">
         {/* Left side */}
         <div className="relative hidden h-full flex-col bg-[url(/bg.svg)] p-10 text-white dark:border-r lg:flex">
           <div className="absolute inset-0" />
@@ -44,13 +37,13 @@ export default function Home() {
         </div>
 
         {/* Right side */}
-        <div id="sign-in-wrapper" className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-fit">
+        <div id="sign-in-wrapper" className="mx-auto flex h-full w-full flex-col justify-center space-y-6 sm:w-fit">
           <SignIn 
-            redirectUrl="http://localhost:3000/dashboard"
+            redirectUrl="/dashboard"
             appearance={{
               elements: {
-                rootBox: "",
-                card: "bg-muted rounded-md",
+                rootBox: "w-full",
+                card: "bg-muted rounded-md w-full",
                 headerTitle: "text-foreground",
                 headerSubtitle: "text-foreground",
                 socialButtonsBlockButton: "border-primary border bg-background/50 hover:bg-muted/90",
@@ -62,6 +55,6 @@ export default function Home() {
           />
         </div>
       </div>
-    </>
+    </div>
   )
 }

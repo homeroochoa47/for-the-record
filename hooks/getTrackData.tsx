@@ -13,7 +13,8 @@ export const getTrackData = () => {
     },
     {
       refetchOnWindowFocus: false, 
-      staleTime: Infinity
+      staleTime: Infinity,
+      retry: false
     }
   )
 }
