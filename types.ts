@@ -72,3 +72,11 @@ export default interface SpotifyTrackInfo {
   currentlyPlayingType: string;
   spotifyID: string;
 }
+
+export type commentCardData = {
+  commentText: string;
+  likes: number;
+  youtubeDisplayName: string;
+  youtubeUserProfileURL: string;
+  // Add other properties as needed
+};

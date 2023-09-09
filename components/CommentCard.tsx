@@ -1,13 +1,10 @@
+import { commentCardData } from '@/types';
 import React from 'react'
 
-interface CommentCardProps {
-  data: {
-    commentText: string
-    likes: number
-    youtubeDisplayName: string
-    youtubeUserProfileURL: string
-  }
-}
+// CommentCard component
+type CommentCardProps = {
+  data: commentCardData;
+};
 
 export default function CommentCard({data}: CommentCardProps) {
   const {commentText, likes, youtubeDisplayName, youtubeUserProfileURL} = data
