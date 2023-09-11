@@ -2,7 +2,7 @@
   <img src="public/for-the-record.svg" align="center" width="400"/>
 </p>
 <p align="center">
-  <strong>A Spotify Commenting Social App buil with <a href="https://nextjs.org">Next.js</a></strong><br />
+  <strong>A Spotify Commenting Social App built with <a href="https://nextjs.org">Next.js</a></strong><br />
 </p>
 
 <p align="center">
