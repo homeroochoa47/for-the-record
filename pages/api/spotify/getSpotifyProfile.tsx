@@ -53,7 +53,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
           clerkUserID: userId,
           spotifyUserID: profileData.id,
           spotifyDisplayName: profileData.display_name,
-          profileImageURL: profileData.images[0].url,
+          profileImageURL: profileData.images[0]?.url || null, // Shorthand way
         },
       ];
       

@@ -27,11 +27,7 @@ interface CommentData {
   authorProfileImageUrl: string;
 }
 
-interface artist {
-  name: string
-}
-
-export async function getYoutubeComments(songName: string, artists: artist[], spotifyID: string) {
+export async function getYoutubeComments(songName: string, artists: [{name: string}], spotifyID: string) {
   const artistNames = artists.map((artistArray) => artistArray.name);
   const searchQuery = [songName, ...artistNames].join(' ');
 

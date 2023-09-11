@@ -15,18 +15,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
-interface UsernameProps {
-  userName: string
-}
-
-export default function Menu(props: UsernameProps) {
+export default function Menu(props: {userName: string}) {
 
   return (
     <div className='flex w-full flex-col items-center h-full md:h-fit md:pb-24'>
 
       {/* desktop */}
       <div className='hidden md:flex flex-col w-full font-semibold text-4xl text-foreground/80 space-y-8'>
-        <Link href="#" className='hover:text-foreground'>Saved Songs</Link>
+        <Link href="#" className='hover:text-foreground'>Saved Threads</Link>
         {/* <Link href="#" className='hover:text-foreground'>My Boards</Link> */}
         <Link href="#" className='hover:text-foreground'>Comments</Link>
         <Link href="#" className='hover:text-foreground'>Song History</Link>
@@ -61,7 +57,7 @@ export default function Menu(props: UsernameProps) {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent className='mr-3 pr-12 max-w-[200px]'>
-                <DropdownMenuItem><Link href="#" className='hover:text-foreground'>Saved Songs</Link></DropdownMenuItem>
+                <DropdownMenuItem><Link href="#" className='hover:text-foreground'>Saved Threads</Link></DropdownMenuItem>
                 <DropdownMenuItem><Link href="#" className='hover:text-foreground'>Comments</Link></DropdownMenuItem>
                 <DropdownMenuItem><Link href="#" className='hover:text-foreground'>Song History</Link></DropdownMenuItem>
                 <DropdownMenuItem><Link href="#" className='hover:text-foreground'>Settings</Link></DropdownMenuItem>

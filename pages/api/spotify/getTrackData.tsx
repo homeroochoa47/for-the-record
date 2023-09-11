@@ -33,6 +33,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       }
     }
 
+    try {
+      // Make the Axios GET request to the API
+      const response = await axios.get(apiUrl, config);
+      console.log(response.status)
+    } catch (error) {
+      console.log(error)
+    }
     // Make the Axios GET request to the API
     const response = await axios.get(apiUrl, config);
 
@@ -41,7 +48,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       res.status(404).send({ error: 'Playback not available or active' });
     } else if (response.status === 200) {
 
-      // Extract only the desired properties
       const { context, item, is_playing: isPlaying, currently_playing_type: currentlyPlayingType } = response.data;
       const spotifyID = item.id
 
