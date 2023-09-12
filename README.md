@@ -4,6 +4,9 @@
 <p align="center">
   <strong>A Spotify Commenting Social App built with <a href="https://nextjs.org">Next.js</a></strong><br />
 </p>
+<p align="center">
+  <strong>This project is currently only functional locally as I'm in the process of getting approval from Spotify for public use.</strong><br />
+</p>
 
 <p align="center">
   <a href="#-features">Features</a> •
