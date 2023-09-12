@@ -54,7 +54,7 @@ export const commentsRelations = relations(comments, ({one, many}) => ({
 
 export const likes = mysqlTable('likes', {
   id: int('id').autoincrement().primaryKey(),
-  userID: mediumint('user_id').notNull(),
+  userID: varchar('user_id', {length: 128}).notNull(),
   commentID: int('comment_id').notNull(),
 })
 
@@ -65,6 +65,6 @@ export const likesRelations = relations(likes, ({one}) => ({
   }),
   users: one(users, {
     fields: [likes.userID],
-    references: [users.id]
+    references: [users.spotifyUserID]
   })
 }))

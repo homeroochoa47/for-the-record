@@ -42,8 +42,6 @@ export default function SongDisplay() {
     )
   }
 
-  console.log(trackData.item.album.external_urls.spotify)
-
   return (
     <div className='flex flex-col w-full mt-14 md:mt-10'>
       <div className='flex w-full justify-between'>

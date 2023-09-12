@@ -1,18 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from './ui/button'
 import CommentCard from './CommentCard'
 import { getTrackData, getTrackComments } from '@/hooks/getTrackData'
 import { Skeleton } from './ui/skeleton'
 import { AxiosError } from 'axios'
 import { commentCardData } from '@/types'
+import { useUser } from '@/context'
 
 const arr = [1,2,3,4,5,6]
 
 export default function CommentBoard() {
-  const {data: trackData, isLoading, isError, error, isFetching}  = getTrackData() 
+  const {data: trackData, isLoading, isError, error, isFetching} = getTrackData()
+
   
   const {data: comments, isLoading: loadingComments, isFetching: fetchingComments} = getTrackComments(trackData)
-
   if (isError && (error as AxiosError).response?.status === 404) {
     return (
       <div>
@@ -50,7 +51,7 @@ export default function CommentBoard() {
 
       <div id='comment-list' className='grid grid-cols-1 md:pr-6 gap-y-4 md:gap-y-7 mt-5 overflow-y-scroll'>
         {comments.slice(0,20).map((item: commentCardData, index: number) => (
-          <CommentCard key={index} data={item}/>
+          trackData && <CommentCard key={index} data={item}/>
         ))}
       </div>
     </div>

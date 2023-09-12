@@ -64,6 +64,13 @@
       "when": 1694134185412,
       "tag": "0008_same_vivisector",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1694549899750,
+      "tag": "0009_lame_warpath",
+      "breakpoints": true
     }
   ]
 }

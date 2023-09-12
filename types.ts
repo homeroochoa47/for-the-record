@@ -78,5 +78,13 @@ export type commentCardData = {
   likes: number;
   youtubeDisplayName: string;
   youtubeUserProfileURL: string;
-  // Add other properties as needed
+  spotifyUserID: string;
+  spotiySongId: string;
+  isYoutubeComment: boolean
+  id: number
+};
+
+export type UserContextType = {
+  userID: string | null;
+  setUserID: (userID: string | null) => void;
 };
