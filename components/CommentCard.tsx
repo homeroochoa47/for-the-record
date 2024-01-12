@@ -15,7 +15,7 @@ type CommentCardProps = {
 
 export default function CommentCard({data}: CommentCardProps) {
   // Retrieve the spotify ID from context
-  const {userID} = useUser()
+  const {userData} = useUser()
 
   // destructure props
   const {commentText, likes, youtubeDisplayName, youtubeUserProfileURL, id} = data
@@ -29,9 +29,9 @@ export default function CommentCard({data}: CommentCardProps) {
   const {data: isLikedData} =  useQuery({ 
     queryKey: ['isLiked', id], 
     queryFn: async () => {
-      const response = await axios.post('/api/db/getUserLikeStatus', {id, userID})
+      const response = await axios.post('/api/db/getUserLikeStatus', {id, userData})
       const data = response.data;
-      return data; 
+      return data;
     }, 
     enabled: isEnabled
   })
@@ -54,7 +54,7 @@ export default function CommentCard({data}: CommentCardProps) {
   
     const likeData = {
       commentID: id,
-      userID: userID,
+      userID: userData!.spotifyUserID,
       newLikeCount: isLiked ? likeCount - 1 : likeCount + 1,
       action: action
     };

@@ -88,3 +88,9 @@ export type UserContextType = {
   userID: string | null;
   setUserID: (userID: string | null) => void;
 };
+
+export type User = {
+  spotifyUserID: string
+  profileImageURL: string
+  spotifyDisplayName: string
+}

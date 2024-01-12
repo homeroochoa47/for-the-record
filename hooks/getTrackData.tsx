@@ -5,14 +5,14 @@ import { useUser } from "@/context";
 
 // global state for track data using react
 export const getTrackData = () => {
-  const {setUserID} = useUser()
+  const {setUserData} = useUser()
 
   return useQuery(
     ['trackData'],
     async () => {
       const response = await axios.get('/api/spotify/getTrackData');
       const data = response.data;
-      setUserID(data.spotifyID)
+      // setUserData(data.spotifyID)
       return data
     },
     {

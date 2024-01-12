@@ -1,17 +1,19 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
+import { User } from './types';
 
 type UserContextType = {
-  userID: string | null;
-  setUserID: (userID: string | null) => void;
+  userData: User | null;
+  setUserData: (userData: User | null) => void;
 };
+
 
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [userID, setUserID] = useState<string | null>(null);
+  const [userData, setUserData] = useState<User | null>(null);
 
   return (
-    <UserContext.Provider value={{ userID, setUserID }}>
+    <UserContext.Provider value={{ userData, setUserData }}>
       {children}
     </UserContext.Provider>
   );

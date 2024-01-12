@@ -2,11 +2,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { getAuth } from '@clerk/nextjs/server';
 
 import { db } from "@/db";
-import { likes, comments } from "@/db/schema";
+import { comments } from "@/db/schema";
 import { eq, and } from "drizzle-orm";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
@@ -19,18 +18,26 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    // receive like data from comment component
-    const {userData, id} = req.body
-    const userID = userData.spotifyUserID
-    
-    // check if this user's ID is associated with a like for the comment ID. Will return a like item from the likes table if it exists.
-    const likeStatus = await db.select().from(likes).where(and(eq(likes.userID, userID), eq(likes.commentID, id)))
-    
-    // return a boolean to the frontend depending on whether there was a like item found
-    const isCommentLiked = likeStatus.length > 0
-    
+    const commentData = req.body
+
+    const dbCommentData = ({
+      spotifyUserID: commentData.spotifyUserID,
+      commentText: commentData.commentText,
+      spotiySongId: commentData.spotifySongID,
+      likes: commentData.likes,
+      isYoutubeComment: commentData.isYoutubeComment,
+      youtubeDisplayName: commentData.youtubeDisplayName,
+      youtubeUserProfileURL: commentData.youtubeUserProfileURL
+    })
+
+    console.log(dbCommentData)
+
+    // await db.insert(comments).values(dbCommentData);
+
+    console.log('Comment added to db.')
+
     // Return the new song and comments to the client
-    return res.status(200).json(isCommentLiked);
+    return res.status(200).json("Comment Added");
   } catch (error) {
     // Handle any Axios or other errors
     console.error('Error fetching data:', error);

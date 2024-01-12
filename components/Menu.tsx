@@ -1,9 +1,4 @@
-import React, { useState } from 'react'
-import { Button } from './ui/button'
 import Link from 'next/link'
-import SongDisplay from './SongDisplay'
-import { getTrackComments, getTrackData } from '@/hooks/getTrackData'
-import { useQueryClient } from '@tanstack/react-query'
 import { UserButton } from '@clerk/nextjs'
 
 import {

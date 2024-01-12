@@ -4,22 +4,26 @@ import axios from "axios";
 import Menu from "./Menu";
 import SongDisplay from "./SongDisplay";
 import { ReactNode } from "react";
+import { useUser } from "@/context";
+import { User } from "@/types";
 
 interface LayoutProps {
   children: ReactNode; // Use ReactNode as the type for children
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
+  const {setUserData} = useUser()
+  // on initial load fetch the user profile data
   const {data, isLoading, isError, error}  = useQuery({
     queryKey: ['profileData'],
     queryFn: async () => {
       const response = await axios.get('/api/spotify/getSpotifyProfile');
-      const { spotifyUserID, display_name } = response.data;
-      const data = { spotifyUserID, display_name };
+      const { spotifyUserID, spotifyDisplayName , profileImageURL } = response.data;
+      const data: User = { spotifyUserID, spotifyDisplayName, profileImageURL };
+      setUserData(data)
       return data
     },
   })
-
   if (isLoading) {
     return <span>Loading...</span>
   }
