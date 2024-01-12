@@ -11,9 +11,11 @@ import axios from 'axios';
 // CommentCard component
 type CommentCardProps = {
   data: commentCardData;
+  profileImage?: string;
+  userName?: string;
 };
 
-export default function CommentCard({data}: CommentCardProps) {
+export default function CommentCard({data, profileImage, userName}: CommentCardProps) {
   // Retrieve the spotify ID from context
   const {userData} = useUser()
 
@@ -26,6 +28,7 @@ export default function CommentCard({data}: CommentCardProps) {
 
   // when comment is loaded, check if the comment has been liked by the current user in the backend if the likecount is more than one
   const isEnabled = likes > 0
+
   const {data: isLikedData} =  useQuery({ 
     queryKey: ['isLiked', id], 
     queryFn: async () => {
@@ -66,8 +69,8 @@ export default function CommentCard({data}: CommentCardProps) {
     <div className='flex flex-col justify-between bg-gradient-to-r from-[#191D1F] via-[#191D1F] to-[#122329] rounded-lg px-5 py-3 space-y-2'>
         <div id='user-and-likes' className='flex w-full text-secondary'>
           {/* retrieve profile data from user and save to database, referencing here */}
-          <img loading='lazy' className='w-6 h-6 rounded-full mr-2' src={youtubeUserProfileURL} alt="" /> 
-          <h5 className='text-md font-medium'>{youtubeDisplayName}</h5>
+          <img loading='lazy' className='w-6 h-6 rounded-full mr-2 object-cover' src={youtubeUserProfileURL || profileImage} alt="" /> 
+          <h5 className='text-md font-medium'>{youtubeDisplayName || userName}</h5>
         </div>
         
         <p id='comment' dangerouslySetInnerHTML={{ __html: commentText }} className='text-foreground/90'></p>

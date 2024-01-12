@@ -48,7 +48,7 @@ export const getTrackComments = (trackData: SpotifyTrackInfo ) => {
     },
     {
       enabled: !!trackData,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       staleTime: Infinity
     }
   )

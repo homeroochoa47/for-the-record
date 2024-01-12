@@ -21,10 +21,9 @@ export default function CommentBoard() {
   const {data: trackData, isLoading: isQueryLoading, isError, error, isFetching} = getTrackData()
 
   // Fetching Track comments
-  const {data: comments, isLoading: loadingComments, isFetching: fetchingComments} = getTrackComments(trackData)
+  const {data: comments, isLoading: loadingComments, isFetching: fetchingComments,} = getTrackComments(trackData)
 
   // states for commenting flow
-  const [hasUserCommented, setHasUserCommented] = useState(false)
   const [isCommentInProgress, setIsCommentInProgress] = useState(false)
 
   //helper for state change
@@ -32,12 +31,13 @@ export default function CommentBoard() {
     setIsCommentInProgress(!isCommentInProgress)
   }
 
-  // on user submit
+  // on user submit, create a FormData object and send the text along with spotify data to the API
   const handleCommentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const commentForm = e.target as HTMLFormElement;
     const formData = new FormData(commentForm);
-    // Access form data by input name attribute
+    
+    // Access form data by input attribute
     const commentText = formData.get("comment") as string;
     const spotifyUserID = userData!.spotifyUserID
     const spotifySongID = trackData.spotifyID
@@ -51,13 +51,12 @@ export default function CommentBoard() {
       youtubeUserProfileURL: null
     }
 
-    mutate(
+    mutate (
       fullCommentData,
       {
         onSuccess: () => {
-          setHasUserCommented(true)
           setIsCommentInProgress(false)
-          fullCommentData.youtubeUserProfileURL = userData!.profileImageURL
+          // fullCommentData.youtubeUserProfileURL = userData!.profileImageURL // sort out this type error
           comments.unshift(fullCommentData)
         }
       }
@@ -99,7 +98,8 @@ export default function CommentBoard() {
     <div id="board-container" className='md:h-full flex flex-col mt-4 relative'>
       <div className='flex flex-col md:flex-row w-full justify-between md:items-center space-y-4 md:space-y-0'>
         <h1 className='font-medium text-3xl md:text-4xl xl:text-5xl italic text-foreground/90'>What others are saying</h1>
-        {!isCommentInProgress && !hasUserCommented &&
+        {/* {!isCommentInProgress && !hasUserCommented && */}
+        {!isCommentInProgress &&
           <Button onClick={changeIsCommentInProgress} size="custom" variant="gold" className='fixed md:static bottom-4 right-4 py-3 md:py-2.5 px-4 lg:py-2 lg:w-60 text-sm md:text-md  xl:text-lg font-medium md:font-normal drop-shadow-lg'>
             Add a comment +
           </Button>
@@ -124,8 +124,8 @@ export default function CommentBoard() {
             </div>
           </form>
         }
-        {comments.slice(0,20).map((item: commentCardData, index: number) => (
-          trackData && <CommentCard key={index} data={item} profileImage={userData?.profileImageURL}/>
+        {comments.slice(0,30).map((item: commentCardData, index: number) => (
+          trackData && <CommentCard key={index} data={item} profileImage={userData?.profileImageURL} userName={userData?.spotifyDisplayName}/>
         ))}
       </div>
     </div>

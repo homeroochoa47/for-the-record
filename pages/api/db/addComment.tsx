@@ -32,7 +32,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     console.log(dbCommentData)
 
-    // await db.insert(comments).values(dbCommentData);
+    await db.insert(comments).values(dbCommentData);
 
     console.log('Comment added to db.')
 
